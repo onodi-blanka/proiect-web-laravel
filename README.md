@@ -70,9 +70,12 @@ pentru un model nou cu tot cu migration file:
 
 `php artisan make:model Flight --migration`
 
-pentru un model nou cu tot cu controlelr file:
+pentru un model nou cu tot cu controller file:
 
 `php artisan make:model Flight --controller`
+
+model nou cu ambele:
+`php artisan make:model YourModelName -c -m`
 
 https://laravel.com/docs/10.x/eloquent
 
