@@ -14,5 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/agenda', function () {
+    return view('agenda');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/sponsorspartners', function () {
+    return view('sponsorspartners');
+});
+
+Route::get('/event', function () {
+    return view('event');
+});
+Route::get('/cart', function () {
+    return view('cos'); // make sure the view name is correct
 });

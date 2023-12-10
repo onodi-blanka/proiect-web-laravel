@@ -1,0 +1,20 @@
+
+.bg-dark .navbar-nav .nav-link {
+    color: floralwhite;
+}
+
+.bg-dark .navbar-nav .nav-link:hover,
+.bg-dark .navbar-nav .nav-link:focus {
+    color: #ffffff;
+}
+
+
+.bg-dark .navbar-nav .active>.nav-link,
+.bg-dark .navbar-nav .nav-link.active,
+.bg-dark .navbar-nav .nav-link.show,
+.bg-dark .navbar-nav .show>.nav-link {
+    color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
