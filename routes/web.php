@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::post('/contact', [ContactController::class, 'submit']);
+
 Route::get('/sponsorspartners', function () {
     return view('sponsorspartners');
 });
@@ -38,3 +41,4 @@ Route::get('/event', function () {
 Route::get('/cart', function () {
     return view('cos'); // make sure the view name is correct
 });
+
