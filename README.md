@@ -80,3 +80,6 @@ model nou cu ambele:
 https://laravel.com/docs/10.x/eloquent
 
 
+php artisan key:generate (o sa schimbe key-ul din .env)
+composer install (instaleaza in vendor toate chestiile)
+
