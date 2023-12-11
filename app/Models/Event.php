@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    public $fillable = ['id','nume', 'descriere', 'locatie', 'data'];
+    public $fillable = ['id','nume', 'descriere', 'locatie', 'data', 'price'];
 }

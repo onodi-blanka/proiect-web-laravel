@@ -32,10 +32,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, ['nume' => 'required',
-                                   'descriere' => 'required',
-                                   'locatie' => 'required',
-                                   'data' => 'required']);
+            'descriere' => 'required',
+            'locatie' => 'required',
+            'data' => 'required',
+            'price' => 'required']);
         Event::create($request->all());
         return redirect()->route('events.index')->with('success', 'Your event was added successfully!');
 
@@ -66,11 +68,12 @@ class EventController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, ['nume' => 'required',
-                                   'descriere' => 'required',
-                                   'locatie' => 'required',
-                                   'data' => 'required']);
+            'descriere' => 'required',
+            'locatie' => 'required',
+            'data' => 'required',
+            'price' => 'required']);
         Event::find($id)->update($request->all());
-        return redirect()->route('events.index')->with('success','Event updated successfully!');
+        return redirect()->route('events.index')->with('success', 'Event updated successfully!');
     }
 
     /**
@@ -79,6 +82,6 @@ class EventController extends Controller
     public function destroy(string $id)
     {
         Event::find($id)->delete();
-        return redirect()->route('events.index')->with('success','Event removed successfully!');
+        return redirect()->route('events.index')->with('success', 'Event removed successfully!');
     }
 }
