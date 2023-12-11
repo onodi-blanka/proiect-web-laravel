@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,31 +17,38 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/home', function () {
-    return view('home');
-});
+// Facem rutele accesibile doar când se stabilește autentificarea
 
-Route::get('/agenda', function () {
-    return view('agenda');
-});
+Auth::routes();
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'auth'], function(){
+    // HOME
+    Route::get('/home', function () {
+        return view('home');
+    });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+    // EVENT
+    Route::get('/event', [EventController::class, 'index']);
+    Route::resource('events', EventController::class);
 
-Route::post('/contact', [ContactController::class, 'submit']);
+    // AGENDA
+    Route::get('/agenda', function () {
+        return view('agenda');
+    });
 
-Route::get('/sponsorspartners', function () {
-    return view('sponsorspartners');
-});
+    // CONTACT
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+    Route::post('/contact', [ContactController::class, 'submit']);
 
-Route::get('/event', function () {
-    return view('event');
-});
-Route::get('/cart', function () {
-    return view('cos'); // make sure the view name is correct
-});
+    // SPONSORS & PARTNERS
+    Route::get('/sponsorspartners', function () {
+        return view('sponsorspartners');
+    });
 
+    // SHOPPING CART
+    Route::get('/cart', function () {
+        return view('cos');
+    });
+});
