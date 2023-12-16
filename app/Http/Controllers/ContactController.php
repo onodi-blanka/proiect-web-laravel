@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    //
     public function submit(Request $request)
     {
 //        echo $request->email;

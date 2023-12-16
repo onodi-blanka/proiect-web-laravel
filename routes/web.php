@@ -20,13 +20,10 @@ use App\Http\Controllers\HomeController;
 // Facem rutele accesibile doar când se stabilește autentificarea
 
 Auth::routes();
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::group(['middleware' => 'auth'], function(){
+Route::get('/', [HomeController::class, 'index']);
+Route::group(['middleware' => 'auth'], function () {
     // HOME
-    Route::get('/home', function () {
-        return view('home');
-    });
-
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     // EVENT
     Route::get('/event', [EventController::class, 'index']);
     Route::resource('events', EventController::class);
@@ -51,4 +48,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/cart', function () {
         return view('cos');
     });
+
+    //BUY TICKET
+    Route::get('/buy-ticket/{id}', [TicketController::class, 'buy'])->name('buy_ticket');
 });

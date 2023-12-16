@@ -6,3 +6,63 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+.bg-dark .navbar-nav .nav-link {
+    color: floralwhite;
+}
+
+.bg-dark .navbar-nav .nav-link:hover,
+.bg-dark .navbar-nav .nav-link:focus {
+    color: #ffffff;
+}
+
+
+
+.bg-dark .navbar-nav .active>.nav-link,
+.bg-dark .navbar-nav .nav-link.active,
+.bg-dark .navbar-nav .nav-link.show,
+.bg-dark .navbar-nav .show>.nav-link {
+    color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-buy-ticket {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    border-radius: 5px;
+    text-align: center;
+}
+.btn-buy-ticket:hover {
+    background-color: #333;
+}
+
+.home-name {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.events-container {
+    margin-top: 20px;
+    width: 100%;
+}
+.event-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 100px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px;
+    font-weight: bold;
+    gap: 10px;
+}
+.event-listing {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding: 10px;
+}
