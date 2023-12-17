@@ -1,33 +1,31 @@
 @extends('layout')
 
-
 @section('content')
-    {{auth()->user()->isAdmin}}
-    @admin
+    <h2 class="agenda_index_title">Select an event to see its agenda</h2>
 
-    @endadmin
-    @isset ($events)
-        <h2>Select an event to see it's agenda</h2>
-        <div class="agenda-event-list">
-            <div class="agenda-event-item">
-                <h4>ID</h4>
-                <h4>Name</h4>
-                <h4 style="flex-basis: 40%">Action</h4>
-            </div>
-        </div>
-        <div class="agenda-event-list">
+    @isset($events)
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
             @foreach($events as $event)
-                <div class="agenda-event-item">
-                    <h4>{{$event->id}}</h4>
-                    <h4>{{$event->nume}}</h4>
-                    <div style="flex-basis: 40%">
+                <tr>
+                    <td>{{ $event->id }}</td>
+                    <td>{{ $event->nume }}</td>
+                    <td>
                         @admin
-                        <a class="btn btn-primary" href="{{ route('agenda.create',$event->id) }}">Create activity</a>
+                        <a class="btn btn-dark" href="{{ route('agenda.create', $event->id) }}">Create activity</a>
                         @endadmin
-                        <a class="btn btn-primary" href="{{ route('agenda.show',$event->id) }}">View agenda</a>
-                    </div>
-                </div>
+                        <a class="btn btn-dark" href="{{ route('agenda.show', $event->id) }}">View agenda</a>
+                    </td>
+                </tr>
             @endforeach
-        </div>
+            </tbody>
+        </table>
     @endisset
 @endsection

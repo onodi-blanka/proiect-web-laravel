@@ -1,46 +1,43 @@
 @extends('layout')
 
 @section('content')
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Errors:</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-    <div>Pag de edit</div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Edit activity
-        </div>
-        <div class="panel-body">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Errors:</strong>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                {{ Form::open(['url' => route('agenda.modify', ['agendaId' => $agenda->id]), 'method' => 'PATCH']) }}
+                <div class="form-group">
+                    {{ Form::label('title', 'Titlu', ['class' => 'font-weight-bold']) }}
+                    {{ Form::text('title', $agenda->title, ['class' => 'form-control', 'placeholder' => 'Enter title']) }}
                 </div>
-            @endif
-
-            {{ Form::open(array('url' => route('agenda.modify', ['agendaId' => $agenda->id]), 'method' => 'PATCH')) }}
-            <div class="form-group">
-                <label for="nume">Titlu</label>
-                <input type="text" name="title" class="form-control" value="{{ $agenda->title}}">
+                <div class="form-group">
+                    {{ Form::label('description', 'Descriere', ['class' => 'font-weight-bold']) }}
+                    {{ Form::textarea('description', $agenda->description, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Enter description']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('startDate', 'Start time', ['class' => 'font-weight-bold']) }}
+                    {{ Form::datetimeLocal('startDate', \Carbon\Carbon::parse($agenda->start_time)->format('Y-m-d\TH:i'), ['class' => 'form-control']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('endDate', 'End time', ['class' => 'font-weight-bold']) }}
+                    {{ Form::datetimeLocal('endDate', \Carbon\Carbon::parse($agenda->end_time)->format('Y-m-d\TH:i'), ['class' => 'form-control']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::submit('Save', ['class' => 'btn btn-dark']) }}
+                    <a href="{{ route('agenda') }}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+                {{ Form::close() }}
             </div>
-            <div class="form-group">
-                <label for="descriere">Descriere</label>
-                <textarea name="description" class="form-control" rows="3">{{$agenda->description }}</textarea>
-            </div>
-            <div class="form-group">
-                <label for="data">Start time</label>
-                <input type="date" name="startDate" class="form-control" value={{ \Carbon\Carbon::parse($agenda->start_time)->format('Y-m-d') }}>
-            </div>
-            <div class="form-group">
-                <label for="data">End time</label>
-                <input type="date" name="endDate" class="form-control" value="{{ \Carbon\Carbon::parse($agenda->end_time)->format('Y-m-d') }}">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-info">
-                <a href="{{ route('agenda') }}" class="btn btndefault">Cancel</a>
-            </div>
-            {{ Form::close() }}
         </div>
     </div>
 @endsection
