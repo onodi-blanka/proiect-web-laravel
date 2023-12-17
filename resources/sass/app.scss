@@ -66,3 +66,16 @@
     margin-bottom: 10px;
     padding: 10px;
 }
+
+.agenda-event-list {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.agenda-event-item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 0 20px;
+}

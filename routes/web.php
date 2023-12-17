@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AgendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +29,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/event', [EventController::class, 'index']);
     Route::resource('events', EventController::class);
 
-    // AGENDA
-    Route::get('/agenda', function () {
-        return view('agenda');
-    });
 
     // CONTACT
     Route::get('/contact', function () {
@@ -51,4 +48,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     //BUY TICKET
     Route::get('/buy-ticket/{id}', [TicketController::class, 'buy'])->name('buy_ticket');
+
+
+    // AGENDA
+    Route::get('/agenda', [AgendaController::class, 'getEventList'])->name('agenda');
+    Route::get('/event/{id}/agenda', [AgendaController::class, 'getAgendaForEvent'])->name('agenda.show');
+    Route::get('/event/{id}/agenda-create', function ($id) {
+        return view('agenda.create')->with('eventId', $id);
+    })->name('agenda.create');
+    Route::get('/event/{id}/agenda-edit', [AgendaController::class, 'getAgendaToEdit'])->name('agenda.edit');
+
+    Route::post('/event/{event}/agenda-store', [AgendaController::class, 'store'])->name('agenda.store');
+    Route::patch('/agenda', [AgendaController::class, 'edit'])->name('agenda.modify');
+    Route::delete('/agenda/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
+
 });
