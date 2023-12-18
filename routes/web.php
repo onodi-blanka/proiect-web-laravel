@@ -6,6 +6,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +47,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart', function () {
         return view('cos');
     });
+    Route::get('cart', [TicketController::class, 'cart'])->name('cart');
+    Route::get('add-to-cart/{id}', [TicketController::class, 'addToCart'])->name('add_to_cart');
+    Route::patch('update-cart', [TicketController::class, 'update'])->name('update_cart');
+    Route::delete('remove-from-cart', [TicketController::class, 'remove'])->name('remove_from_cart');
+
+    // STRIPE
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
     //BUY TICKET
-    Route::get('/buy-ticket/{id}', [TicketController::class, 'buy'])->name('buy_ticket');
 
 
     // AGENDA

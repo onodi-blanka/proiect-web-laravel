@@ -14,7 +14,7 @@
                 <div class="event-listing">
                     <span>{{ $event->nume }}</span>
                     <span>{{ $event->data }}</span>
-                    <a href="{{ route('buy_ticket', $event->id) }}" class="btn-buy-ticket">Buy Ticket</a>
+                    <a href="{{ url('add-to-cart/'.$event->id) }}" class="btn-buy-ticket">Buy Ticket</a>
                 </div>
             @empty
                 <p>No events here</p>

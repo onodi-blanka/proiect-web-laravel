@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="panel panel-default">
+    <div class="container mt-5">
         <div class="panel-heading">
             Modify event details
         </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-info">
-                    <a href="{{ route('events.index') }}" class="btn btndefault">Cancel</a>
+                    <a href="{{ route('events.index') }}" class="btn btn-secondary">Cancel</a>
                 </div>
             {!! Form::close() !!}
         </div>
