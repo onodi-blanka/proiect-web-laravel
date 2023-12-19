@@ -1,21 +1,11 @@
 @extends('layout')
 
 @section('content')
-    @if($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Event list
-        </div>
-
+    <div class="container mt-5">
         <div class="panel-body">
             <div class="form-group">
                 <div class="pull-right">
-                    <a href="/events/create" class="btn btn-default">Add new event</a>
+                    <a href="/events/create" class="btn btn-primary">Add new event</a>
                 </div>
             </div>
 
@@ -43,7 +33,7 @@
                                 <a class="btn btn-success" href="{{ route('events.show',$event->id) }}">Visualise</a>
                                 <a class="btn btn-primary" href="{{ route('events.edit',$event->id) }}">Modify</a>
                                 {{ Form::open(['method' => 'DELETE','route' => ['events.destroy', $event->id],'style'=>'display:inline']) }}
-                                {{ Form::submit('Delete', ['class' => 'btn btndanger']) }}
+                                {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                                 {{ Form::close() }}
                             </td>
                         </tr>

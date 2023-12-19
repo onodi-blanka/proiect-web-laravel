@@ -6,3 +6,139 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+.bg-dark .navbar-nav .nav-link {
+    color: floralwhite;
+}
+
+.bg-dark .navbar-nav .nav-link:hover,
+.bg-dark .navbar-nav .nav-link:focus {
+    color: #ffffff;
+}
+
+
+.bg-dark .navbar-nav .active > .nav-link,
+.bg-dark .navbar-nav .nav-link.active,
+.bg-dark .navbar-nav .nav-link.show,
+.bg-dark .navbar-nav .show > .nav-link {
+    color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-buy-ticket {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-buy-ticket:hover {
+    background-color: #333;
+}
+
+.home-name {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.events-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.event-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 100px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px;
+    font-weight: bold;
+    gap: 10px;
+}
+
+.event-listing {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.agenda-event-list {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.agenda-event-item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.agenda_index_title {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: top;
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+    border-left: none;
+    border-right: none;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    border-left: none;
+    border-right: none;
+}
+
+.table-bordered {
+    border: none;
+}
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table th, .table td {
+    width: 33.33%;
+}
+
+
+.btn-dark {
+    margin-right: 10px;
+
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
