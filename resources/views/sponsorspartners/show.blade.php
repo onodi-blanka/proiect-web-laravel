@@ -15,7 +15,7 @@
         </div>
         </div>
 
-
+        @admin
         <div style="margin-top: 40px;">
             <a href="{{ route('sponsorspartners.edit', $sponsorPartner->id) }}" class="btn btn-primary" style="background-color: rgb(73, 71, 71);margin-right:10px">Modify</a>
             <form action="{{ route('sponsorspartners.destroy', $sponsorPartner->id) }}" method="POST" style="display: inline;">
@@ -24,5 +24,6 @@
                 <button type="submit" class="btn btn-danger" style="background-color: rgb(73, 71, 71);" onclick="return confirm('Are you sure you want to delete this sponsor?')">Delete</button>
             </form>
         </div>
+        @endadmin
     </div>
 @endsection

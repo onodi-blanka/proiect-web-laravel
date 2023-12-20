@@ -23,7 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
         public function index() {
-            $events = Event::all(); // Fetch all events
+            $events = Event::with('agenda', 'sponsorspartners')->get(); // Fetch all events
             return view('home', ['events' => $events]); // Pass events to the view
         }
 

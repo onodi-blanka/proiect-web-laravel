@@ -2,10 +2,13 @@
 
 @section('content')
     <div class="container mt-5">
+        <h1>Events</h1>
         <div class="panel-body">
             <div class="form-group">
                 <div class="pull-right">
+                    @admin
                     <a href="/events/create" class="btn btn-primary">Add new event</a>
+                    @endadmin
                 </div>
             </div>
 
@@ -31,10 +34,12 @@
                             <td>{{ $event->price }}</td>
                             <td>
                                 <a class="btn btn-success" href="{{ route('events.show',$event->id) }}">Visualise</a>
+                                @admin
                                 <a class="btn btn-primary" href="{{ route('events.edit',$event->id) }}">Modify</a>
                                 {{ Form::open(['method' => 'DELETE','route' => ['events.destroy', $event->id],'style'=>'display:inline']) }}
                                 {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                                 {{ Form::close() }}
+                                @endadmin
                             </td>
                         </tr>
                     @endforeach
