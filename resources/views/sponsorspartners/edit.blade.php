@@ -39,6 +39,16 @@
                     <label for="logo">Logo</label>
                     <input type="file" name="logo" id="logo" class="form-control">
                 </div>
+
+                <div class="form-group">
+                    <label for="event">Event</label>
+                    <select name="event_id" id="event_id">
+                        @foreach($events as $event)
+                            <option value="{{ $event->id }}">{{ $event->nume }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-info">
                         <a href="{{ route('sponsorspartners.index') }}" class="btn btn-default">Cancel</a>

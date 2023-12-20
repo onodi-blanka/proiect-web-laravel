@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\SponsorsPartners;
+use App\Models\Event;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
@@ -13,18 +14,12 @@ class SponsorsPartnersController extends Controller
      */
     public function index()
     {
-        // Logic for displaying all SponsorsPartners
+        
         $sponsorsPartners = SponsorsPartners::all();
 
-        // Log sponsors and partners to the console
-        $sponsors = $sponsorsPartners->where('type', 'sponsor')->toArray();;
-        $partners = $sponsorsPartners->where('type', 'partner')->toArray();;
+        $sponsors = SponsorsPartners::where('type', 'sponsor')->with('event')->get();
+        $partners = SponsorsPartners::where('type', 'partner')->with('event')->get();
 
-        // Log data to the console
-        echo "<script>";
-        echo "console.log('Sponsors:', " . json_encode($sponsors) . ");";
-        echo "console.log('Partners:', " . json_encode($partners) . ");";
-        echo "</script>";
 
         return view('sponsorspartners.index', compact('sponsors', 'partners'));
     }
@@ -34,36 +29,75 @@ class SponsorsPartnersController extends Controller
      */
     public function create()
     {
-        return view('sponsorspartners.create');
+        $events = Event::all();
+        return view('sponsorspartners.create', compact('events'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        try {
-            $validatedData = $request->validate([
-                'name' => 'required',
-                'type' => 'required',
-                'details' => 'required',
-                'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-        
-            if ($request->hasFile('logo')) {
-                $logo = $request->file('logo');
-                $logoPath = $logo->store('logos', 'public');
-                $validatedData['logo_path'] = $logoPath;
-            }
-    
-            SponsorsPartners::create($validatedData);
-    
-            return redirect()->route('sponsorspartners.index')->with('success', 'New Sponsor/Partner added successfully!');
-            } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred. Please try again.');
-            }
 
+     //Functie corecta pt sponsori/parteneri fara event
+    // public function store(Request $request)
+    // {
+    //     try {
+    //         $validatedData = $request->validate([
+    //             'name' => 'required',
+    //             'type' => 'required',
+    //             'details' => 'required',
+    //             'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    //         ]);
+
+        
+    //         if ($request->hasFile('logo')) {
+    //             $logo = $request->file('logo');
+    //             $logoPath = $logo->store('logos', 'public');
+    //             $validatedData['logo_path'] = $logoPath;
+    //         }
+    
+    //         SponsorsPartners::create($validatedData);
+    
+    //         return redirect()->route('sponsorspartners.index')->with('success', 'New Sponsor/Partner added successfully!');
+    //         } catch (\Exception $e) {
+    //         return redirect()->back()->with('error', 'An error occurred. Please try again.');
+    //         }
+
+    // }
+
+
+    public function store(Request $request)
+{
+    try {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+            'details' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'event_id' => 'required|exists:events,id',
+        ]);
+
+
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $logoPath = $logo->store('logos', 'public');
+            $validatedData['logo_path'] = $logoPath;
+        }
+
+        // Adaugă event_id-ul în datele validate pentru a crea entitatea SponsorsPartners
+        $validatedData['event_id'] = $request->input('event_id');
+
+        SponsorsPartners::create($validatedData);
+
+        return redirect()->route('sponsorspartners.index')->with('success', 'New Sponsor/Partner added successfully!');
+    } catch (\Exception $e) {
+        echo "<script>";
+        echo "console.log('Error:', " . json_encode($e) . ");";
+        echo "</script>";
+        return redirect()->back()->with('error', 'An error occurred. Please try again.');
     }
+}
+
 
 
     /**
@@ -105,7 +139,11 @@ class SponsorsPartnersController extends Controller
     {
 
         $sponsorsPartners = SponsorsPartners::findOrFail($id);
-        return view('sponsorspartners.edit', ['sponsorPartner' => $sponsorsPartners]);
+
+        $events = Event::all();
+        // return view('sponsorspartners.edit', compact('sponsorsPartners', 'events'));
+
+        return view('sponsorspartners.edit', ['sponsorPartner' => $sponsorsPartners, 'events' => $events]);
     }
 
     /**
@@ -120,12 +158,16 @@ class SponsorsPartnersController extends Controller
                 'type' => 'required',
                 'details' => 'nullable',
                 'logo' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+                'event_id' => 'required|exists:events,id',
             ]);
     
             $sponsorPartner = SponsorsPartners::findOrFail($id);
             $sponsorPartner->name = $request->input('name');
             $sponsorPartner->type = $request->input('type');
             $sponsorPartner->details = $request->input('details');
+
+            $sponsorPartner->event_id = $request->input('event_id');
+
     
             if ($request->hasFile('logo')) {
                 $logo = $request->file('logo');

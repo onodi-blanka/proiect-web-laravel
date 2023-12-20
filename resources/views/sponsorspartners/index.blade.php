@@ -12,6 +12,7 @@
                     <th style="width: 33.33%; text-align: left;">Name</th>
                     <th style="width: 33.33%; text-align: left;">Details</th>
                     <th style="width: 33.33%; text-align: left;">Logo</th>
+                    <th>Event</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,11 @@
                                 $imagePath = 'storage/' . $sponsor['logo_path'];
                             @endphp
                             <img src="{{ asset($imagePath) }}" alt="Logo" width="50" height="50">
+                        </td>
+                        <td> 
+                            @if($sponsor->event)
+                                {{ $sponsor->event->nume }}
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -49,6 +55,7 @@
                     <th style="width: 33.33%; text-align: left;">Name</th>
                     <th style="width: 33.33%; text-align: left;">Details</th>
                     <th style="width: 33.33%; text-align: left;">Logo</th>
+                    <th>Event</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +73,11 @@
                                 $imagePath = 'storage/' . $partner['logo_path'];
                             @endphp
                             <img src="{{ asset($imagePath) }}" alt="Logo" width="50" height="50">
+                        </td>
+                        <td> 
+                            @if($partner->event)
+                                {{ $partner->event->nume }}
+                            @endif
                         </td>
                     </tr>
                 @endforeach
