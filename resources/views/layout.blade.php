@@ -26,17 +26,17 @@
             <li class="nav-item {{ request()->is('home') ? 'active' : '' }} pl-3">
                 <a class="nav-link" href="{{ url('/home') }}">Home</a>
             </li>
+            <li class="nav-item {{ request()->is('event') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/event') }}">Event</a>
+            </li>
             <li class="nav-item {{ request()->is('agenda') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('agenda') }}">Agenda</a>
-            </li>
-            <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
             </li>
             <li class="nav-item {{ request()->is('sponsorspartners') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/sponsorspartners') }}">Sponsors & Partners</a>
             </li>
-            <li class="nav-item {{ request()->is('event') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('/event') }}">Event</a>
+            <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
