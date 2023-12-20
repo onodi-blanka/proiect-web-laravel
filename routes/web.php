@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\SponsorsPartnersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TicketController;
@@ -39,9 +40,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/contact', [ContactController::class, 'submit']);
 
     // SPONSORS & PARTNERS
-    Route::get('/sponsorspartners', function () {
-        return view('sponsorspartners');
-    });
+    Route::resource('sponsorspartners', SponsorsPartnersController::class)->except(['showAll']);
+    Route::get('/sponsorspartners/showAll', [SponsorsPartnersController::class, 'showAll'])->name('sponsorspartners.showAll');
+    Route::get('/sponsorspartners/{id}', [SponsorsPartnersController::class, 'show'])->name('sponsorspartners.show');
+    Route::get('/sponsorspartners/{id}/edit', [SponsorsPartnersController::class, 'edit'])->name('sponsorspartners.edit');
+    Route::put('/sponsorspartners/{id}', [SponsorsPartnersController::class, 'update'])->name('sponsorspartners.update');
+    Route::delete('/sponsorspartners/{id}', [SponsorsPartnersController::class, 'destroy'])->name('sponsorspartners.destroy');
 
     // SHOPPING CART
     Route::get('/cart', function () {

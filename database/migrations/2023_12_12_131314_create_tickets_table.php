@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained(
                 table:'events', indexName: 'event_id')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained(
-                table:'users', indexNmae: 'user_id');
+                table:'users', indexName: 'user_id');
             $table->string('row');
             $table->string('seat');
             $table->decimal("price", 6, 2);

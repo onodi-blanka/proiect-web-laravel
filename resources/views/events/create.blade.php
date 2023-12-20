@@ -39,7 +39,7 @@
                     <label for="price">Price</label>
                     <input type="number" name="price" class="form-control" value="{{ old('price') }}">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom:50px">
                     <input type="submit" value="Add event" class="btn btn-info">
                     <a href="{{ route('events.index') }}" class="btn btn-secondary">Cancel</a>
                 </div>
